@@ -23,80 +23,85 @@ class _HomeHeroState extends State<HomeHero> {
 
   @override
   Widget build(BuildContext context) {
-    return SliverFillRemaining(
+    return SizedBox(
+        height: MediaQuery.of(context).size.height -
+            (Scaffold.of(context).appBarMaxHeight ?? 0),
+        width: MediaQuery.of(context).size.width,
         child: Consumer<BannerViewModel>(
-      builder: (ctx, banner, child) => Stack(
-        children: [
-          Container(
-            color:
-                Theme.of(context).appBarTheme.backgroundColor?.withAlpha(180),
-          ),
-          ListView.builder(
-            cacheExtent:
-                MediaQuery.of(context).size.width * banner.banners.length,
-            controller: _pageController,
-            scrollDirection: Axis.horizontal,
-            physics: const PageScrollPhysics()
-                .applyTo(const ClampingScrollPhysics()),
-            itemCount: banner.banners.length,
-            itemBuilder: (ctx, idx) => Image.network(
-              banner.banners[idx].imageUrl,
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 24),
-              child: SmoothPageIndicator(
+          builder: (ctx, banner, child) => Stack(
+            children: [
+              Container(
+                color: Theme.of(context)
+                    .appBarTheme
+                    .backgroundColor
+                    ?.withAlpha(180),
+              ),
+              ListView.builder(
+                cacheExtent:
+                    MediaQuery.of(context).size.width * banner.banners.length,
                 controller: _pageController,
-                count: banner.banners.length,
-                effect: const CustomizableEffect(
-                  spacing: 12,
-                  activeDotDecoration: DotDecoration(
-                    width: 7,
-                    height: 7,
-                    rotationAngle: 45,
-                    color: Colors.white,
-                    dotBorder: DotBorder(
-                      width: 1,
-                      color: Colors.white,
-                    ),
-                  ),
-                  dotDecoration: DotDecoration(
-                    width: 7,
-                    height: 7,
-                    rotationAngle: 45,
-                    color: Colors.transparent,
-                    dotBorder: DotBorder(
-                      width: 1,
-                      color: Colors.white,
+                scrollDirection: Axis.horizontal,
+                physics: const PageScrollPhysics()
+                    .applyTo(const ClampingScrollPhysics()),
+                itemCount: banner.banners.length,
+                itemBuilder: (ctx, idx) => Image.network(
+                  banner.banners[idx].imageUrl,
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 24),
+                  child: SmoothPageIndicator(
+                    controller: _pageController,
+                    count: banner.banners.length,
+                    effect: const CustomizableEffect(
+                      spacing: 12,
+                      activeDotDecoration: DotDecoration(
+                        width: 7,
+                        height: 7,
+                        rotationAngle: 45,
+                        color: Colors.white,
+                        dotBorder: DotBorder(
+                          width: 1,
+                          color: Colors.white,
+                        ),
+                      ),
+                      dotDecoration: DotDecoration(
+                        width: 7,
+                        height: 7,
+                        rotationAngle: 45,
+                        color: Colors.transparent,
+                        dotBorder: DotBorder(
+                          width: 1,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 48),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.black45,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 30)),
+                    onPressed: () {},
+                    child: Text(
+                      'Explore Collection'.toUpperCase(),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 48),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                    backgroundColor: Colors.black45,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 0, horizontal: 30)),
-                onPressed: () {},
-                child: Text(
-                  'Explore Collection'.toUpperCase(),
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    ));
+        ));
   }
 }

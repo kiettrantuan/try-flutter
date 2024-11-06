@@ -14,8 +14,6 @@ class BannerViewModel extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    print('fetchBanners');
-
     try {
       _banners = await _apiService.fetchBanners();
     } catch (e) {
