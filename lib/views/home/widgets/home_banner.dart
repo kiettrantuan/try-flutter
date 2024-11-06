@@ -56,7 +56,8 @@ class _HomeHeroState extends State<HomeHero> {
                   padding: const EdgeInsets.only(bottom: 24),
                   child: SmoothPageIndicator(
                     controller: _pageController,
-                    count: banner.banners.length,
+                    count:
+                        banner.banners.isNotEmpty ? banner.banners.length : 1,
                     effect: const CustomizableEffect(
                       spacing: 12,
                       activeDotDecoration: DotDecoration(
