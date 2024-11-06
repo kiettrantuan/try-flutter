@@ -1,4 +1,5 @@
 import 'package:f_shop_1/view_models/banner_view_model.dart';
+import 'package:f_shop_1/views/home/home_screen_with_sliver.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -93,7 +94,13 @@ class _HomeHeroState extends State<HomeHero> {
                         backgroundColor: Colors.black45,
                         padding: const EdgeInsets.symmetric(
                             vertical: 0, horizontal: 30)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePageWithSliver()),
+                      );
+                    },
                     child: Text(
                       'Explore Collection'.toUpperCase(),
                       style: const TextStyle(color: Colors.white),

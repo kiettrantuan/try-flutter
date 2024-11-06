@@ -11,60 +11,66 @@ class HomePageWithSliver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          iconSize: 24,
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
-        ),
-        title: SvgPicture.asset('assets/logo.svg'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            iconSize: 24,
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
-          IconButton(
-            iconSize: 24,
-            icon: const Icon(Icons.shopping_bag_outlined),
-            onPressed: () {},
-          )
-        ],
-      ),
       body: ClampTopCustomScrollView(slivers: [
+        SliverAppBar(
+          pinned: true,
+          expandedHeight: 120.0,
+          flexibleSpace: FlexibleSpaceBar(
+            title: SvgPicture.asset('assets/logo.svg'),
+          ),
+          // leading: IconButton(
+          //   iconSize: 24,
+          //   icon: const Icon(Icons.menu),
+          //   onPressed: () {},
+          // ),
+          // title: SvgPicture.asset('assets/logo.svg'),
+          // centerTitle: true,
+          // actions: [
+          //   IconButton(
+          //     iconSize: 24,
+          //     icon: const Icon(Icons.search),
+          //     onPressed: () {},
+          //   ),
+          //   IconButton(
+          //     iconSize: 24,
+          //     icon: const Icon(Icons.shopping_bag_outlined),
+          //     onPressed: () {},
+          //   )
+          // ],
+        ),
         ChangeNotifierProvider(
             create: (context) => BannerViewModel(),
             child: const HomeHeroWithSliver()),
         SliverSafeArea(
+            top: false,
             sliver: SliverList(
                 delegate: SliverChildListDelegate([
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: MediaQuery.sizeOf(context).height * 2,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  // A fixed-height child.
-                  color: const Color(0xffeeee00), // Yellow
-                  height: 120.0,
-                  alignment: Alignment.center,
-                  child: const Text('Fixed Height Content'),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.sizeOf(context).height * 2,
                 ),
-                Container(
-                  // Another fixed-height child.
-                  color: const Color(0xff008000), // Green
-                  height: 120.0,
-                  alignment: Alignment.center,
-                  child: const Text('Fixed Height Content'),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      // A fixed-height child.
+                      color: const Color(0xffeeee00), // Yellow
+                      height: 120.0,
+                      alignment: Alignment.center,
+                      child: const Text('Fixed Height Content'),
+                    ),
+                    Container(
+                      // Another fixed-height child.
+                      color: const Color(0xff008000), // Green
+                      height: 120.0,
+                      alignment: Alignment.center,
+                      child: const Text('Fixed Height Content'),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-        ])))
+              ),
+            ])))
       ]),
     );
   }
