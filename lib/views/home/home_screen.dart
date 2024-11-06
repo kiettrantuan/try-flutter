@@ -1,22 +1,26 @@
 import 'package:f_shop_1/view_models/banner_view_model.dart';
 import 'package:f_shop_1/views/home/widgets/home_banner.dart';
+import 'package:f_shop_1/views/home/widgets/home_drawer.dart';
 import 'package:f_shop_1/widgets/clamp_top_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          iconSize: 24,
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
-        ),
+        leading: Builder(
+            builder: (ctx) => IconButton(
+                  iconSize: 24,
+                  icon: const Icon(Icons.menu),
+                  onPressed: () {
+                    Scaffold.of(ctx).openDrawer();
+                  },
+                )),
         title: SvgPicture.asset('assets/logo.svg'),
         centerTitle: true,
         actions: [
@@ -68,6 +72,7 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+      drawer: const HomeDrawer(),
     );
   }
 }

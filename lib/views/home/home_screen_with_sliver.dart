@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-class HomePageWithSliver extends StatelessWidget {
-  const HomePageWithSliver({super.key});
+class HomeScreenWithSliver extends StatelessWidget {
+  const HomeScreenWithSliver({super.key});
 
   @override
   Widget build(BuildContext context) {
