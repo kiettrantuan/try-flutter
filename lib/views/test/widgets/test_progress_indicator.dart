@@ -12,29 +12,29 @@ class ProgressIndicatorExample extends StatefulWidget {
 
 class _ProgressIndicatorExampleState extends State<ProgressIndicatorExample>
     with TickerProviderStateMixin {
-  late AnimationController controller;
+  // late AnimationController controller;
   bool determinate = false;
   double _progressValue = 0.0;
-  late Timer _timer;
+  Timer? _timer;
 
   @override
   void initState() {
-    controller = AnimationController(
-      /// [AnimationController]s can be created with `vsync: this` because of
-      /// [TickerProviderStateMixin].
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    )..addListener(() {
-        setState(() {});
-      });
-    controller.repeat();
+    // controller = AnimationController(
+    //   /// [AnimationController]s can be created with `vsync: this` because of
+    //   /// [TickerProviderStateMixin].
+    //   vsync: this,
+    //   duration: const Duration(seconds: 2),
+    // )..addListener(() {
+    //     setState(() {});
+    //   });
+    // controller.repeat();
     super.initState();
   }
 
   @override
   void dispose() {
-    _timer.cancel();
-    controller.dispose();
+    _timer?.cancel();
+    // controller.dispose();
     super.dispose();
   }
 
@@ -46,7 +46,7 @@ class _ProgressIndicatorExampleState extends State<ProgressIndicatorExample>
             double.parse((_progressValue + 0.01).toStringAsFixed(2));
         // Stop the timer when progress is complete.
         if (_progressValue >= 1.0) {
-          _timer.cancel();
+          _timer?.cancel();
         }
       });
     });
@@ -65,7 +65,7 @@ class _ProgressIndicatorExampleState extends State<ProgressIndicatorExample>
           ),
           const SizedBox(height: 30),
           LinearProgressIndicator(
-            value: determinate ? _progressValue : controller.value,
+            value: determinate ? _progressValue : null,
             semanticsLabel: 'Linear progress indicator',
           ),
           const SizedBox(height: 10),
@@ -78,20 +78,28 @@ class _ProgressIndicatorExampleState extends State<ProgressIndicatorExample>
                 ),
               ),
               Switch(
+                thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                    (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
+                    return const Icon(Icons.close);
+                  }
+                  return const Icon(Icons
+                      .check); // All other states will use the default thumbIcon.
+                }),
                 value: determinate,
                 onChanged: (bool value) {
                   setState(() {
                     determinate = value;
                     if (determinate) {
                       _progressValue = 0.0;
-                      controller.stop();
+                      // controller.stop();
                       startProgress();
                     } else {
-                      _timer.cancel();
+                      _timer?.cancel();
                       _progressValue = 0.0;
-                      controller
-                        ..forward(from: controller.value)
-                        ..repeat();
+                      // controller
+                      //   ..forward(from: controller.value)
+                      //   ..repeat();
                     }
                   });
                 },

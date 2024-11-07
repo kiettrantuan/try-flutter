@@ -1,6 +1,5 @@
 import 'package:f_shop_1/view_models/banner_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -32,10 +31,7 @@ class _HomeHeroState extends State<HomeHero> {
           builder: (ctx, banner, child) => Stack(
             children: [
               Container(
-                color: Theme.of(context)
-                    .appBarTheme
-                    .backgroundColor
-                    ?.withAlpha(180),
+                color: Theme.of(context).colorScheme.inverseSurface,
               ),
               ListView.builder(
                 cacheExtent:
@@ -49,6 +45,22 @@ class _HomeHeroState extends State<HomeHero> {
                   banner.banners[idx].imageUrl,
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.cover,
+                  loadingBuilder: (_, child, progress) {
+                    if (progress == null) return child;
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
+                          value: progress.expectedTotalBytes != null
+                              ? (progress.cumulativeBytesLoaded /
+                                  progress.expectedTotalBytes!)
+                              : 0.0,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
               Align(

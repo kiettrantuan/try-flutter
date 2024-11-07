@@ -1,5 +1,8 @@
 import 'package:f_shop_1/views/example/example_screen.dart';
 import 'package:f_shop_1/views/test/widgets/test_progress_indicator.dart';
+import 'package:f_shop_1/views/test/widgets/test_radio.dart';
+import 'package:f_shop_1/views/test/widgets/test_slider.dart';
+import 'package:f_shop_1/views/test/widgets/test_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,15 +19,20 @@ class TestScreen2 extends StatelessWidget {
           title: const Row(
             children: [Icon(Icons.developer_mode), Text('Test2')],
           ),
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: <Widget>[
-              Tab(
-                icon: Icon(Icons.cloud_outlined),
+              const Tab(
+                icon: Badge(
+                  label: Text('Cloud'),
+                  backgroundColor: Colors.blueAccent,
+                  child: Icon(Icons.cloud_outlined),
+                ),
               ),
               Tab(
-                icon: Icon(Icons.beach_access_sharp),
+                icon: Badge.count(
+                    count: 1000, child: const Icon(Icons.beach_access_sharp)),
               ),
-              Tab(
+              const Tab(
                 icon: Icon(Icons.brightness_5_sharp),
               ),
             ],
@@ -57,30 +65,66 @@ class TestScreen2 extends StatelessWidget {
             Row(
               children: [
                 NavigationRail(
-                  destinations: destinations
-                      .map((d) => NavigationRailDestination(
-                          icon: d.icon, label: Text(d.label)))
-                      .toList(),
+                  destinations: List.generate(
+                      destinations.length,
+                      (idx) => NavigationRailDestination(
+                          icon: destinations[idx].icon,
+                          label: Text(destinations[idx].label))),
                   selectedIndex: 0,
                   elevation: 5,
                 ),
                 // const VerticalDivider(),
-                const BackButton()
+                const BackButton(),
+                const SnackBarExample()
+              ],
+            ),
+            ListView(
+              children: const [
+                Text("It's rainy here"),
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: LinearProgressIndicator(),
+                ),
+                Center(child: CircularProgressIndicator()),
+                ProgressIndicatorExample(),
+                Wrap(
+                  spacing: 8.0, // gap between adjacent chips
+                  runSpacing: 4.0, // gap between lines
+                  children: <Widget>[
+                    Chip(
+                      avatar: CircleAvatar(
+                          backgroundColor: Colors.blue,
+                          child: const Text('AH')),
+                      label: const Text('Hamilton'),
+                    ),
+                    Chip(
+                      avatar: CircleAvatar(
+                          backgroundColor: Colors.blue,
+                          child: const Text('ML')),
+                      label: const Text('Lafayette'),
+                    ),
+                    Chip(
+                      avatar: CircleAvatar(
+                          backgroundColor: Colors.blue,
+                          child: const Text('HM')),
+                      label: const Text('Mulligan'),
+                    ),
+                    Chip(
+                      avatar: CircleAvatar(
+                          backgroundColor: Colors.blue,
+                          child: const Text('JL')),
+                      label: const Text('Laurens'),
+                    ),
+                  ],
+                ),
+                SliderExample(),
+                RadioExample()
               ],
             ),
             ListView(
               children: [
-                Text("It's rainy here"),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: LinearProgressIndicator(),
-                ),
-                Center(child: CircularProgressIndicator()),
-                ProgressIndicatorExample()
+                Text("It's sunny here"),
               ],
-            ),
-            const Center(
-              child: Text("It's sunny here"),
             ),
           ],
         ),
