@@ -34,7 +34,7 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: 'home-with-sliver',
           builder: (BuildContext context, GoRouterState state) {
-            return const HomeScreenWithSliver();
+            return HomeScreenWithSliver();
           },
         ),
         GoRoute(

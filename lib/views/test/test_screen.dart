@@ -1,3 +1,4 @@
+import 'package:f_shop_1/views/test/widgets/test_indexed_stack.dart';
 import 'package:f_shop_1/views/test/widgets/test_segment_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -114,6 +115,11 @@ class TestScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: SegmentedButtonExample(),
           ),
+          const Divider(
+            indent: 20,
+            endIndent: 20,
+          ),
+          IndexedStackExample(),
           ...ListTile.divideTiles(context: context, tiles: [
             const ListTile(
               title: Text('Horse'),

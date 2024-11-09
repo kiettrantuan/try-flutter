@@ -34,8 +34,9 @@ class _HomeHeroState extends State<HomeHero> {
                 color: Theme.of(context).colorScheme.inverseSurface,
               ),
               ListView.builder(
-                cacheExtent:
-                    MediaQuery.of(context).size.width * banner.banners.length,
+                itemExtent: MediaQuery.of(context).size.width,
+                // cacheExtent:
+                //     MediaQuery.of(context).size.width * banner.banners.length,
                 controller: _pageController,
                 scrollDirection: Axis.horizontal,
                 physics: const PageScrollPhysics()

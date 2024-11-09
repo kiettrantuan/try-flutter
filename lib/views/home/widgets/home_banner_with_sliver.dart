@@ -32,8 +32,9 @@ class _HomeHeroWithSliverState extends State<HomeHeroWithSliver> {
                 Theme.of(context).appBarTheme.backgroundColor?.withAlpha(180),
           ),
           ListView.builder(
-            cacheExtent:
-                MediaQuery.of(context).size.width * banner.banners.length,
+            itemExtent: MediaQuery.of(context).size.width,
+            // cacheExtent:
+            //     MediaQuery.of(context).size.width * banner.banners.length,
             controller: _pageController,
             scrollDirection: Axis.horizontal,
             physics: const PageScrollPhysics()
