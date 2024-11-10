@@ -3,6 +3,7 @@ import 'package:f_shop_1/views/home/home_screen_with_sliver.dart';
 import 'package:f_shop_1/views/login/login_screen.dart';
 import 'package:f_shop_1/views/test/test_screen.dart';
 import 'package:f_shop_1/views/test/test_screen_2.dart';
+import 'package:f_shop_1/views/test/test_screen_3.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -47,6 +48,12 @@ final GoRouter _router = GoRouter(
                 path: 'test2',
                 builder: (BuildContext context, GoRouterState state) {
                   return const TestScreen2();
+                },
+              ),
+              GoRoute(
+                path: 'test3',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const TestScreen3();
                 },
               ),
             ]),

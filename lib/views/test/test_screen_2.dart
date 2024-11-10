@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:f_shop_1/views/example/example_screen.dart';
 import 'package:f_shop_1/views/test/widgets/test_input.dart';
+import 'package:f_shop_1/views/test/widgets/test_intrinsic.dart';
 import 'package:f_shop_1/views/test/widgets/test_menu.dart';
+import 'package:f_shop_1/views/test/widgets/test_offstage.dart';
 import 'package:f_shop_1/views/test/widgets/test_progress_indicator.dart';
 import 'package:f_shop_1/views/test/widgets/test_radio.dart';
 import 'package:f_shop_1/views/test/widgets/test_slider.dart';
@@ -83,7 +87,13 @@ class TestScreen2 extends StatelessWidget {
                 ),
                 // const VerticalDivider(),
                 const BackButton(),
-                const SnackBarExample()
+                const Column(
+                  children: [
+                    SnackBarExample(),
+                    IntrinsicHeightExample(),
+                    IntrinsicWidthExample()
+                  ],
+                ),
               ],
             ),
             ListView(
@@ -140,8 +150,8 @@ class TestScreen2 extends StatelessWidget {
                 constraints: const BoxConstraints(maxHeight: 200),
                 child: CarouselView(
                   itemSnapping: true,
-                  itemExtent: 250,
-                  shrinkExtent: 200,
+                  itemExtent: 300,
+                  shrinkExtent: 100,
                   padding: const EdgeInsets.all(20.0),
                   elevation: 10,
                   children: List.generate(
@@ -153,21 +163,135 @@ class TestScreen2 extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                color: Colors.black12,
-                child: const ListBody(
-                  mainAxis: Axis.vertical,
-                  reverse: true,
-                  children: <Widget>[
-                    Text('Child 1'),
-                    Text('Child 2'),
-                    Text('Child 3'),
-                  ],
+              FractionallySizedBox(
+                // heightFactor: 0.1,
+                widthFactor: 0.3,
+                alignment: Alignment.centerRight,
+                child: Container(color: Colors.cyan, child: const Text('data')),
+              ),
+              const TestLayout2(),
+              const OffstageExample(),
+              const RotatedBox(
+                quarterTurns: 3,
+                child: Text('RotatedBox'),
+              ),
+              Transform(
+                alignment: Alignment.topRight,
+                transform: Matrix4.skewY(0.3)..rotateZ(-pi / 7.0),
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  color: const Color(0xFFE8581C),
+                  child: const Text('Apartment for rent!'),
                 ),
-              )
-            ])
+              ),
+              for (var i = 1; i < 4; i++)
+                // Only Effect on Child has Unbound Parent
+                LimitedBox(
+                  maxHeight: 50,
+                  child: Container(
+                    color: Color.fromRGBO(50, 250, 50, i * 0.1),
+                  ),
+                )
+            ]),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class TestLayout2 extends StatelessWidget {
+  const TestLayout2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: Colors.black12,
+      child: ListBody(
+        mainAxis: Axis.vertical,
+        reverse: true,
+        children: <Widget>[
+          const Text('Child 1'),
+          Container(
+              color: Colors.brown,
+              height: 100,
+              width: 100,
+              child: const Baseline(
+                baseline: 80,
+                baselineType: TextBaseline.alphabetic,
+                child: Text(
+                  'Baseline 80 / 100',
+                  style: TextStyle(color: Colors.white),
+                ),
+              )),
+          const Text('Child 3'),
+          Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: Container(
+                  color: Colors.amber,
+                  height: 60,
+                  child: FittedBox(
+                    fit: BoxFit.cover,
+                    child: Image.network(
+                      'https://picsum.photos/400?random=10',
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                color: Colors.red,
+                height: 50,
+                width: 100,
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  clipBehavior: Clip.hardEdge,
+                  child: Image.network(
+                    'https://picsum.photos/400?random=11',
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 5,
+                child: Container(
+                  color: Colors.amber,
+                  height: 60,
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: Image.network(
+                      'https://picsum.photos/50?random=12',
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                color: Colors.blue,
+                height: 70,
+                width: 100,
+                child: FittedBox(
+                  alignment: Alignment.bottomRight,
+                  fit: BoxFit.scaleDown,
+                  child: Image.network(
+                    'https://picsum.photos/50?random=13',
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  color: Colors.amber,
+                  height: 60,
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Image.network(
+                      'https://picsum.photos/400?random=14',
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

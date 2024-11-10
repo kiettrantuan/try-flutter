@@ -107,6 +107,12 @@ class TestScreen extends StatelessWidget {
                 onPressed: () => context.go('/test/test2'),
                 child: const Text('Test2')),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+                onPressed: () => context.go('/test/test3'),
+                child: const Text('Test3')),
+          ),
           const Divider(
             indent: 20,
             endIndent: 20,
@@ -119,7 +125,7 @@ class TestScreen extends StatelessWidget {
             indent: 20,
             endIndent: 20,
           ),
-          IndexedStackExample(),
+          const IndexedStackExample(),
           ...ListTile.divideTiles(context: context, tiles: [
             const ListTile(
               title: Text('Horse'),
