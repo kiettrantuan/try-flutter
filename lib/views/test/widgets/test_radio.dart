@@ -30,7 +30,7 @@ class _RadioExampleState extends State<RadioExample> {
                     _character = value;
                   });
                 },
-                activeColor: Colors.grey,
+                activeColor: Colors.red,
               ),
               const Text(
                 'lafayette',

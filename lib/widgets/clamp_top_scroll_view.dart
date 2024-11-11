@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 class ClampTopCustomScrollView extends StatefulWidget {
   final List<Widget> slivers;
-  ScrollController? controller;
+  final ScrollController controller;
 
-  ClampTopCustomScrollView({super.key, required this.slivers, this.controller});
+  ClampTopCustomScrollView({
+    super.key,
+    required this.slivers,
+    ScrollController? controller,
+  }) : controller = controller ?? ScrollController();
 
   @override
   State<ClampTopCustomScrollView> createState() =>
@@ -14,11 +18,9 @@ class ClampTopCustomScrollView extends StatefulWidget {
 class _ClampTopCustomScrollViewState extends State<ClampTopCustomScrollView> {
   @override
   void initState() {
-    widget.controller ??= ScrollController();
-    widget.controller?.addListener(() {
-      if (widget.controller != null &&
-          (widget.controller!.position.pixels < 0)) {
-        widget.controller?.jumpTo(0);
+    widget.controller.addListener(() {
+      if (widget.controller.position.pixels < 0) {
+        widget.controller.jumpTo(0);
       }
     });
     super.initState();

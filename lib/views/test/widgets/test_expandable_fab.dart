@@ -60,7 +60,7 @@ class _ExpandableFabState extends State<ExpandableFab>
 
   @override
   Widget build(BuildContext context) {
-    // SizedBox w h = distance + 54 (FAB normal size)
+    // SizedBox w h = widget.distance + 54 (FAB normal size)
     return SizedBox.expand(
       child: Stack(
         alignment: Alignment.bottomRight,

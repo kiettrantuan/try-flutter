@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:f_shop_1/views/example/example_screen.dart';
+import 'package:f_shop_1/views/test/widgets/test_day_picker.dart';
 import 'package:f_shop_1/views/test/widgets/test_input.dart';
 import 'package:f_shop_1/views/test/widgets/test_intrinsic.dart';
 import 'package:f_shop_1/views/test/widgets/test_menu.dart';
@@ -20,7 +21,7 @@ class TestScreen2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: 0,
-      length: 4,
+      length: 5,
       child: Scaffold(
         bottomNavigationBar: BottomAppBar(
           shape: const CircularNotchedRectangle(),
@@ -33,9 +34,14 @@ class TestScreen2 extends StatelessWidget {
                 child: const Icon(Icons.schedule),
                 onPressed: () {
                   Future<TimeOfDay?> selectedTime = showTimePicker(
-                      initialTime: TimeOfDay.now(),
-                      context: context,
-                      initialEntryMode: TimePickerEntryMode.input);
+                          initialTime: TimeOfDay.now(),
+                          context: context,
+                          initialEntryMode: TimePickerEntryMode.input)
+                      .then((_time) {
+                    print(_time);
+                    return _time;
+                  });
+                  // showDatePicker(context: context, firstDate: firstDate, lastDate: lastDate)
                 },
               ),
             ],
@@ -68,6 +74,9 @@ class TestScreen2 extends StatelessWidget {
               ),
               const Tab(
                 icon: Icon(Icons.account_balance),
+              ),
+              const Tab(
+                icon: Icon(Icons.add),
               ),
             ],
           ),
@@ -135,13 +144,6 @@ class TestScreen2 extends StatelessWidget {
                 RadioExample()
               ],
             ),
-            // ListView(
-            //   children: const [
-            //     Text("It's sunny here"),
-            //     DatePickerExample(),
-            //     // InputExample(),
-            //   ],
-            // ),
             const InputExample(),
             ListView(children: [
               const TestLayout1(),
@@ -169,7 +171,6 @@ class TestScreen2 extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: Container(color: Colors.cyan, child: const Text('data')),
               ),
-              const TestLayout2(),
               const OffstageExample(),
               const RotatedBox(
                 quarterTurns: 3,
@@ -193,6 +194,7 @@ class TestScreen2 extends StatelessWidget {
                   ),
                 )
             ]),
+            TestLayout2(),
           ],
         ),
       ),
@@ -207,8 +209,7 @@ class TestLayout2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return ColoredBox(
       color: Colors.black12,
-      child: ListBody(
-        mainAxis: Axis.vertical,
+      child: ListView(
         reverse: true,
         children: <Widget>[
           const Text('Child 1'),
@@ -225,72 +226,73 @@ class TestLayout2 extends StatelessWidget {
                 ),
               )),
           const Text('Child 3'),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  color: Colors.amber,
-                  height: 60,
-                  child: FittedBox(
-                    fit: BoxFit.cover,
-                    child: Image.network(
-                      'https://picsum.photos/400?random=10',
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                color: Colors.red,
-                height: 50,
-                width: 100,
-                child: FittedBox(
-                  fit: BoxFit.cover,
-                  clipBehavior: Clip.hardEdge,
-                  child: Image.network(
-                    'https://picsum.photos/400?random=11',
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 5,
-                child: Container(
-                  color: Colors.amber,
-                  height: 60,
-                  child: FittedBox(
-                    fit: BoxFit.contain,
-                    child: Image.network(
-                      'https://picsum.photos/50?random=12',
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                color: Colors.blue,
-                height: 70,
-                width: 100,
-                child: FittedBox(
-                  alignment: Alignment.bottomRight,
-                  fit: BoxFit.scaleDown,
-                  child: Image.network(
-                    'https://picsum.photos/50?random=13',
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  color: Colors.amber,
-                  height: 60,
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: Image.network(
-                      'https://picsum.photos/400?random=14',
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          DatePickerExample(),
+          // Row(
+          //   children: [
+          //     Expanded(
+          //       flex: 2,
+          //       child: Container(
+          //         color: Colors.amber,
+          //         height: 60,
+          //         child: FittedBox(
+          //           fit: BoxFit.cover,
+          //           child: Image.network(
+          //             'https://picsum.photos/400?random=10',
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //     Container(
+          //       color: Colors.red,
+          //       height: 50,
+          //       width: 100,
+          //       child: FittedBox(
+          //         fit: BoxFit.cover,
+          //         clipBehavior: Clip.hardEdge,
+          //         child: Image.network(
+          //           'https://picsum.photos/400?random=11',
+          //         ),
+          //       ),
+          //     ),
+          //     Expanded(
+          //       flex: 5,
+          //       child: Container(
+          //         color: Colors.amber,
+          //         height: 60,
+          //         child: FittedBox(
+          //           fit: BoxFit.contain,
+          //           child: Image.network(
+          //             'https://picsum.photos/50?random=12',
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //     Container(
+          //       color: Colors.blue,
+          //       height: 70,
+          //       width: 100,
+          //       child: FittedBox(
+          //         alignment: Alignment.bottomRight,
+          //         fit: BoxFit.scaleDown,
+          //         child: Image.network(
+          //           'https://picsum.photos/50?random=13',
+          //         ),
+          //       ),
+          //     ),
+          //     Expanded(
+          //       child: Container(
+          //         color: Colors.amber,
+          //         height: 60,
+          //         child: FittedBox(
+          //           fit: BoxFit.fitWidth,
+          //           child: Image.network(
+          //             'https://picsum.photos/400?random=14',
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

@@ -14,6 +14,7 @@ class TestScreen3 extends StatelessWidget {
       // see the layout change.
       textDirection: TextDirection.ltr,
       child: Scaffold(
+        // floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         floatingActionButton: ExpandableFab(distance: 112, children: [
           ActionButton(
             onPressed: () {}, // => _showAction(context, 0),
@@ -67,7 +68,7 @@ class TestScreen3 extends StatelessWidget {
                 ],
               ),
             ),
-            const FlowMenu()
+            // const FlowMenu()
           ],
         ),
       ),

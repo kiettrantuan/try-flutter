@@ -171,13 +171,14 @@ class ShowBottomSheetExample extends StatelessWidget {
           Scaffold.of(context).showBottomSheet(
             (BuildContext context) {
               return SizedBox(
-                height: 200,
+                height: 500,
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       const Text('Hello from Persistent Bottom Sheet'),
+                      CardExample(),
                       ElevatedButton(
                         child: const Text('Open Modal BottomSheet'),
                         onPressed: () {
@@ -185,11 +186,16 @@ class ShowBottomSheetExample extends StatelessWidget {
                             context: context,
                             builder: (_) => SafeArea(
                               child: Center(
-                                child: ElevatedButton(
-                                  child: const Text('Close'),
-                                  onPressed: () {
-                                    context.pop();
-                                  },
+                                child: Column(
+                                  children: [
+                                    CardExample(),
+                                    ElevatedButton(
+                                      child: const Text('Close'),
+                                      onPressed: () {
+                                        context.pop();
+                                      },
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -221,6 +227,7 @@ class CardExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
+        color: Colors.lime,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[

@@ -32,9 +32,11 @@ class _SnackBarExampleState extends State<SnackBarExample> {
                 ),
                 behavior: floating ? SnackBarBehavior.floating : null,
                 width: floating ? 280.0 : null, // Width of the SnackBar.
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+                shape: floating
+                    ? RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      )
+                    : null,
               ),
             );
           },

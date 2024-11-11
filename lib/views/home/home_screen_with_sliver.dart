@@ -18,6 +18,7 @@ class HomeScreenWithSliver extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FloatingActionButton(
+              heroTag: 'fab_up',
               onPressed: () {
                 controller.animateTo(
                   controller.position.minScrollExtent,
@@ -31,6 +32,7 @@ class HomeScreenWithSliver extends StatelessWidget {
             height: 10,
           ),
           FloatingActionButton(
+              heroTag: 'fab_down',
               onPressed: () {
                 controller.animateTo(
                   controller.position.maxScrollExtent,
