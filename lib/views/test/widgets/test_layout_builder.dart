@@ -20,7 +20,7 @@ class _LayoutBuilderExampleState extends State<LayoutBuilderExample> {
                 isWideContainer = !isWideContainer;
               });
             },
-            child: Text('toggle')),
+            child: const Text('toggle')),
         Container(
           width: isWideContainer ? 350 : 200,
           color: Colors.black38,

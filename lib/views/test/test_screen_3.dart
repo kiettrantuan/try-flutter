@@ -42,7 +42,7 @@ class TestScreen3 extends StatelessWidget {
                       color: Colors.black12,
                       width: 300,
                       height: 200,
-                      child: CustomMultiChildLayoutExample()),
+                      child: const CustomMultiChildLayoutExample()),
                   Container(
                       color: Colors.black26,
                       width: 100,
@@ -54,7 +54,7 @@ class TestScreen3 extends StatelessWidget {
                           width: 200,
                           height: 100,
                           color: Colors.yellow,
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               'Hello!',
                               style: TextStyle(
@@ -63,11 +63,11 @@ class TestScreen3 extends StatelessWidget {
                           ),
                         ),
                       )),
-                  LayoutBuilderExample()
+                  const LayoutBuilderExample()
                 ],
               ),
             ),
-            FlowMenu()
+            const FlowMenu()
           ],
         ),
       ),

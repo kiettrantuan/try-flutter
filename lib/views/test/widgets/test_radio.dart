@@ -32,7 +32,7 @@ class _RadioExampleState extends State<RadioExample> {
                 },
                 activeColor: Colors.grey,
               ),
-              Text(
+              const Text(
                 'lafayette',
                 style: TextStyle(color: Colors.black, fontSize: 15.0),
               )
@@ -55,7 +55,7 @@ class _RadioExampleState extends State<RadioExample> {
                 },
                 activeColor: Colors.grey,
               ),
-              Text(
+              const Text(
                 'jefferson',
                 style: TextStyle(color: Colors.black, fontSize: 15.0),
               )

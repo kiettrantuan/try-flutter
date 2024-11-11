@@ -60,6 +60,7 @@ class _ExpandableFabState extends State<ExpandableFab>
 
   @override
   Widget build(BuildContext context) {
+    // SizedBox w h = distance + 54 (FAB normal size)
     return SizedBox.expand(
       child: Stack(
         alignment: Alignment.bottomRight,
@@ -84,7 +85,10 @@ class _ExpandableFabState extends State<ExpandableFab>
         child: Center(
           child: IconButton.filledTonal(
             onPressed: _toggle,
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
+            style: IconButton.styleFrom(
+                elevation: 4,
+                shadowColor: Theme.of(context).colorScheme.shadow),
           ),
         ),
       ),
