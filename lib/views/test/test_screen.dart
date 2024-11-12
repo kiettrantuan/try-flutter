@@ -178,7 +178,7 @@ class ShowBottomSheetExample extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       const Text('Hello from Persistent Bottom Sheet'),
-                      CardExample(),
+                      const CardExample(),
                       ElevatedButton(
                         child: const Text('Open Modal BottomSheet'),
                         onPressed: () {
@@ -188,7 +188,7 @@ class ShowBottomSheetExample extends StatelessWidget {
                               child: Center(
                                 child: Column(
                                   children: [
-                                    CardExample(),
+                                    const CardExample(),
                                     ElevatedButton(
                                       child: const Text('Close'),
                                       onPressed: () {

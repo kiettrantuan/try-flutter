@@ -37,9 +37,9 @@ class TestScreen2 extends StatelessWidget {
                           initialTime: TimeOfDay.now(),
                           context: context,
                           initialEntryMode: TimePickerEntryMode.input)
-                      .then((_time) {
-                    print(_time);
-                    return _time;
+                      .then((time) {
+                    print(time);
+                    return time;
                   });
                   // showDatePicker(context: context, firstDate: firstDate, lastDate: lastDate)
                 },
@@ -194,7 +194,7 @@ class TestScreen2 extends StatelessWidget {
                   ),
                 )
             ]),
-            TestLayout2(),
+            const TestLayout2(),
           ],
         ),
       ),
@@ -226,7 +226,7 @@ class TestLayout2 extends StatelessWidget {
                 ),
               )),
           const Text('Child 3'),
-          DatePickerExample(),
+          const DatePickerExample(),
           // Row(
           //   children: [
           //     Expanded(
