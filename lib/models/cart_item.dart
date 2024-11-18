@@ -13,4 +13,11 @@ class CartItem {
   int quantity;
 
   CartItem({required this.colorItem, required this.quantity});
+
+  CartItem copyWith({ColorItem? colorItem, int? quantity}) {
+    return CartItem(
+      colorItem: colorItem ?? this.colorItem,
+      quantity: quantity ?? this.quantity,
+    );
+  }
 }

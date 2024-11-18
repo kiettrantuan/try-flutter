@@ -1,10 +1,13 @@
 import 'dart:math';
 
+import 'package:f_shop_1/bloc/cart/cart_bloc.dart';
 import 'package:f_shop_1/view_models/banner_view_model.dart';
 import 'package:f_shop_1/views/home/widgets/home_banner_with_sliver.dart';
+import 'package:f_shop_1/views/home/widgets/home_colors_with_bloc.dart';
 import 'package:f_shop_1/widgets/clamp_top_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreenWithSliver extends StatelessWidget {
@@ -51,6 +54,34 @@ class HomeScreenWithSliver extends StatelessWidget {
           flexibleSpace: FlexibleSpaceBar(
             title: SvgPicture.asset('assets/logo.svg'),
           ),
+          actions: [
+            IconButton(
+              iconSize: 24,
+              icon: const Icon(Icons.search),
+              onPressed: () {},
+            ),
+            IconButton(
+              iconSize: 24,
+              icon: const TotalItemBadge(),
+              // icon: BlocBuilder<CartBloc, CartState>(builder: (ctx, state) {
+              //   return Badge.count(
+              //       isLabelVisible: state.items.isNotEmpty,
+              //       count: state.items.length,
+              //       child: const Icon(Icons.shopping_bag_outlined));
+              // }),
+              // icon: Consumer<CartViewModel>(
+              //   builder: (_, cart, __) {
+              //     return Badge.count(
+              //         isLabelVisible: cart.cartItems.keys.isNotEmpty,
+              //         count: cart.cartItems.keys.length,
+              //         child: const Icon(Icons.shopping_bag_outlined));
+              //   },
+              // ),
+              onPressed: () {
+                context.go('/home-with-sliver/cart-with-bloc');
+              },
+            )
+          ],
           // leading: IconButton(
           //   iconSize: 24,
           //   icon: const Icon(Icons.menu),
@@ -74,11 +105,8 @@ class HomeScreenWithSliver extends StatelessWidget {
         ChangeNotifierProvider(
             create: (context) => BannerViewModel(),
             child: const HomeHeroWithSliver()),
-        SliverToBoxAdapter(
-          child: Container(
-            height: 10,
-            color: Colors.indigo,
-          ),
+        const SliverToBoxAdapter(
+          child: HomeColorsWithBloc(),
         ),
         SliverPersistentHeader(
             pinned: true,
@@ -219,5 +247,19 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     return maxHeight != oldDelegate.maxHeight ||
         minHeight != oldDelegate.minHeight ||
         child != oldDelegate.child;
+  }
+}
+
+class TotalItemBadge extends StatelessWidget {
+  const TotalItemBadge({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    int totalItem = context.select((CartBloc bloc) => bloc.state.items.length);
+    bool isVisible = totalItem > 0;
+    return Badge.count(
+        isLabelVisible: isVisible,
+        count: totalItem,
+        child: const Icon(Icons.shopping_bag_outlined));
   }
 }
