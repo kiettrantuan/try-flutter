@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:f_shop_1/bloc/cart/cart_bloc.dart';
-import 'package:f_shop_1/view_models/banner_view_model.dart';
 import 'package:f_shop_1/views/home/widgets/home_banner_with_sliver.dart';
 import 'package:f_shop_1/views/home/widgets/home_colors_with_bloc.dart';
 import 'package:f_shop_1/widgets/clamp_top_scroll_view.dart';
@@ -102,9 +101,7 @@ class HomeScreenWithSliver extends StatelessWidget {
           //   )
           // ],
         ),
-        ChangeNotifierProvider(
-            create: (context) => BannerViewModel(),
-            child: const HomeHeroWithSliver()),
+        const HomeHeroWithSliver(),
         const SliverToBoxAdapter(
           child: HomeColorsWithBloc(),
         ),

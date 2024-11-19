@@ -16,14 +16,17 @@ class _HomeHeroState extends State<HomeHero> {
   @override
   void initState() {
     super.initState();
-    // After 1st frame built (safe if need context)
-    // WidgetsBinding.instance.addPostFrameCallback
 
-    // But fetchBanners don't need that so Future.microtask for execute ASAP
-    Future.microtask(() {
-      // ignore: use_build_context_synchronously
-      Provider.of<BannerViewModel>(context, listen: false).fetchBanners();
-    });
+    // move to banner_view_model constructor
+
+    // // After 1st frame built (safe if need context)
+    // // WidgetsBinding.instance.addPostFrameCallback
+    //
+    // // But fetchBanners don't need that so Future.microtask for execute ASAP
+    // Future.microtask(() {
+    //   // ignore: use_build_context_synchronously
+    //   Provider.of<BannerViewModel>(context, listen: false).fetchBanners();
+    // });
   }
 
   @override

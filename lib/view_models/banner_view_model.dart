@@ -10,6 +10,11 @@ class BannerViewModel extends ChangeNotifier {
   List<BannerItem> get banners => _banners;
   bool get isLoading => _isLoading;
 
+  BannerViewModel() {
+    print('object');
+    fetchBanners();
+  }
+
   Future<void> fetchBanners() async {
     _isLoading = true;
     notifyListeners();
