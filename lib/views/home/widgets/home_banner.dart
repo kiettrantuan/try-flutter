@@ -21,6 +21,7 @@ class _HomeHeroState extends State<HomeHero> {
 
     // But fetchBanners don't need that so Future.microtask for execute ASAP
     Future.microtask(() {
+      // ignore: use_build_context_synchronously
       Provider.of<BannerViewModel>(context, listen: false).fetchBanners();
     });
   }

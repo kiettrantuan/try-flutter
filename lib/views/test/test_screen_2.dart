@@ -11,6 +11,7 @@ import 'package:f_shop_1/views/test/widgets/test_radio.dart';
 import 'package:f_shop_1/views/test/widgets/test_slider.dart';
 import 'package:f_shop_1/views/test/widgets/test_snack_bar.dart';
 import 'package:f_shop_1/views/test/widgets/test_table.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -33,12 +34,14 @@ class TestScreen2 extends StatelessWidget {
               OutlinedButton(
                 child: const Icon(Icons.schedule),
                 onPressed: () {
-                  Future<TimeOfDay?> selectedTime = showTimePicker(
+                  showTimePicker(
                           initialTime: TimeOfDay.now(),
                           context: context,
                           initialEntryMode: TimePickerEntryMode.input)
                       .then((time) {
-                    print(time);
+                    if (kDebugMode) {
+                      print(time);
+                    }
                     return time;
                   });
                   // showDatePicker(context: context, firstDate: firstDate, lastDate: lastDate)

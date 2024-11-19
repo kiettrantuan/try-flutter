@@ -1,5 +1,5 @@
 import 'package:f_shop_1/models/cart_item.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class CartViewModel extends ChangeNotifier {
   final Map<String, CartItem> _cartItems = {};
@@ -34,14 +34,18 @@ class CartViewModel extends ChangeNotifier {
               CartItem(colorItem: colorItem, quantity: existed.quantity + 1),
           ifAbsent: () => CartItem(colorItem: colorItem, quantity: 1));
     } catch (e) {
-      print('Error add item: $e');
+      if (kDebugMode) {
+        print('Error add item: $e');
+      }
     } finally {
       _isLoading = false;
       notifyListeners();
     }
 
     _cartItems.forEach((key, value) {
-      print('$key: ${value.quantity}');
+      if (kDebugMode) {
+        print('$key: ${value.quantity}');
+      }
     });
   }
 
@@ -60,7 +64,9 @@ class CartViewModel extends ChangeNotifier {
         );
       }
     } catch (e) {
-      print('Error removeOne item: $e');
+      if (kDebugMode) {
+        print('Error removeOne item: $e');
+      }
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -74,7 +80,9 @@ class CartViewModel extends ChangeNotifier {
     try {
       _cartItems.remove(id);
     } catch (e) {
-      print('Error removeAll item: $e');
+      if (kDebugMode) {
+        print('Error removeAll item: $e');
+      }
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -88,7 +96,9 @@ class CartViewModel extends ChangeNotifier {
     try {
       _cartItems.clear();
     } catch (e) {
-      print('Error clear item: $e');
+      if (kDebugMode) {
+        print('Error clear item: $e');
+      }
     } finally {
       _isLoading = false;
       notifyListeners();

@@ -1,6 +1,6 @@
 import 'package:f_shop_1/models/banner.dart';
 import 'package:f_shop_1/services/api_service.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class BannerViewModel extends ChangeNotifier {
   final ApiService _apiService = ApiService();
@@ -17,7 +17,9 @@ class BannerViewModel extends ChangeNotifier {
     try {
       _banners = await _apiService.fetchBanners();
     } catch (e) {
-      print('Error fetching banners: $e');
+      if (kDebugMode) {
+        print('Error fetching banners: $e');
+      }
     } finally {
       _isLoading = false;
       notifyListeners();

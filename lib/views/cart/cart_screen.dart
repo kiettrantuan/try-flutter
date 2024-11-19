@@ -1,5 +1,6 @@
 import 'package:f_shop_1/view_models/cart_view_model.dart';
 import 'package:f_shop_1/widgets/color_tile.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,9 @@ class _CartScreenState extends State<CartScreen> {
           for (var entry in cart.cartItems.entries) {
             final id = entry.key;
             final cartItem = entry.value;
-            print(id);
+            if (kDebugMode) {
+              print(id);
+            }
 
             tiles.insert(
                 0,

@@ -1,5 +1,6 @@
 import 'package:f_shop_1/views/test/widgets/test_indexed_stack.dart';
 import 'package:f_shop_1/views/test/widgets/test_segment_button.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -55,7 +56,9 @@ class TestScreen extends StatelessWidget {
               child: const Icon(Icons.search),
               onPressed: () async {
                 var txt = await showMyDialog();
-                print(txt);
+                if (kDebugMode) {
+                  print(txt);
+                }
                 // showDialog(
                 //     context: context,
                 //     builder: (_) => AlertDialog(
