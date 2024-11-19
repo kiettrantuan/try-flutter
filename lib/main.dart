@@ -1,4 +1,6 @@
+import 'package:f_shop_1/bloc/banner/banner_bloc.dart';
 import 'package:f_shop_1/bloc/cart/cart_bloc.dart';
+import 'package:f_shop_1/services/api_service.dart';
 import 'package:f_shop_1/view_models/cart_view_model.dart';
 import 'package:f_shop_1/views/cart/cart_screen.dart';
 import 'package:f_shop_1/views/cart/cart_screen_with_bloc.dart';
@@ -87,8 +89,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CartBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CartBloc>(create: (_) => CartBloc()),
+        BlocProvider<BannerBloc>(
+            create: (_) =>
+                BannerBloc(apiService: ApiService())..add(FetchBanners())),
+      ],
       child: MultiProvider(
         providers: [ChangeNotifierProvider(create: (_) => CartViewModel())],
         child: MaterialApp.router(

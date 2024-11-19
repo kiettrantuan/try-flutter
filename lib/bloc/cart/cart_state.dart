@@ -1,6 +1,6 @@
 part of 'cart_bloc.dart';
 
-class CartState extends Equatable {
+final class CartState extends Equatable {
   final Map<String, CartItem> _items;
 
   const CartState({required Map<String, CartItem> items}) : _items = items;

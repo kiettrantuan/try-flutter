@@ -8,6 +8,20 @@ class CartViewModel extends ChangeNotifier {
   Map<String, CartItem> get cartItems => _cartItems;
   bool get isLoading => _isLoading;
 
+  bool _disposed = false;
+  bool get disposed => _disposed;
+
+  @override
+  void notifyListeners() {
+    if (!disposed) super.notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
   // need id only
   Future<void> add(ColorItem colorItem) async {
     _isLoading = true;
