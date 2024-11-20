@@ -3,24 +3,38 @@ import 'package:f_shop_1/services/api_service.dart';
 import 'package:flutter/foundation.dart';
 
 class BannerViewModel extends ChangeNotifier {
-  final ApiService _apiService = ApiService();
+  final ApiService apiService;
   List<BannerItem> _banners = [];
-  bool _isLoading = false;
-
   List<BannerItem> get banners => _banners;
+  bool _isLoading = false;
   bool get isLoading => _isLoading;
+  bool _disposed = false;
+  bool get disposed => _disposed;
 
-  BannerViewModel() {
-    print('object');
-    fetchBanners();
+  BannerViewModel({required this.apiService}) {
+    if (kDebugMode) {
+      print('constructor');
+    }
+    _fetchBanners();
   }
 
-  Future<void> fetchBanners() async {
+  @override
+  void notifyListeners() {
+    if (!disposed) super.notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
+  Future<void> _fetchBanners() async {
     _isLoading = true;
     notifyListeners();
 
     try {
-      _banners = await _apiService.fetchBanners();
+      _banners = await apiService.fetchBanners();
     } catch (e) {
       if (kDebugMode) {
         print('Error fetching banners: $e');

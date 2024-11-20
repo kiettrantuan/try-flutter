@@ -36,76 +36,83 @@ class _HomeHeroState extends State<HomeHero> {
             (Scaffold.of(context).appBarMaxHeight ?? 0),
         width: MediaQuery.of(context).size.width,
         child: Consumer<BannerViewModel>(
+          // child: ,
           builder: (ctx, banner, child) => Stack(
             children: [
+              // if (child != null) child,
               Container(
                 color: Theme.of(context).colorScheme.inverseSurface,
               ),
-              ListView.builder(
-                itemExtent: MediaQuery.of(context).size.width,
-                // cacheExtent:
-                //     MediaQuery.of(context).size.width * banner.banners.length,
-                controller: _pageController,
-                scrollDirection: Axis.horizontal,
-                physics: const PageScrollPhysics()
-                    .applyTo(const ClampingScrollPhysics()),
-                itemCount: banner.banners.length,
-                itemBuilder: (ctx, idx) => Image.network(
-                  banner.banners[idx].imageUrl,
-                  width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (_, child, progress) {
-                    if (progress == null) return child;
-                    return SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.secondary,
-                          value: progress.expectedTotalBytes != null
-                              ? (progress.cumulativeBytesLoaded /
-                                  progress.expectedTotalBytes!)
-                              : 0.0,
+              ScrollConfiguration(
+                  behavior: const ScrollBehavior(),
+                  child: GlowingOverscrollIndicator(
+                      axisDirection: AxisDirection.right,
+                      color: Theme.of(context).hoverColor,
+                      child: ListView.builder(
+                        itemExtent: MediaQuery.of(context).size.width,
+                        // cacheExtent:
+                        //     MediaQuery.of(context).size.width * banner.banners.length,
+                        controller: _pageController,
+                        scrollDirection: Axis.horizontal,
+                        physics: const PageScrollPhysics()
+                            .applyTo(const ClampingScrollPhysics()),
+                        itemCount: banner.banners.length,
+                        itemBuilder: (ctx, idx) => Image.network(
+                          banner.banners[idx].imageUrl,
+                          width: MediaQuery.of(context).size.width,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (_, child, progress) {
+                            if (progress == null) return child;
+                            return SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.secondary,
+                                  value: progress.expectedTotalBytes != null
+                                      ? (progress.cumulativeBytesLoaded /
+                                          progress.expectedTotalBytes!)
+                                      : 0.0,
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 24),
-                  child: SmoothPageIndicator(
-                    controller: _pageController,
-                    count:
-                        banner.banners.isNotEmpty ? banner.banners.length : 1,
-                    effect: const CustomizableEffect(
-                      spacing: 12,
-                      activeDotDecoration: DotDecoration(
-                        width: 7,
-                        height: 7,
-                        rotationAngle: 45,
-                        color: Colors.white,
-                        dotBorder: DotBorder(
-                          width: 1,
+                      ))),
+              if (banner.banners.isNotEmpty)
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 24),
+                    child: SmoothPageIndicator(
+                      controller: _pageController,
+                      count: banner.banners.length,
+                      effect: const CustomizableEffect(
+                        spacing: 12,
+                        activeDotDecoration: DotDecoration(
+                          width: 7,
+                          height: 7,
+                          rotationAngle: 45,
                           color: Colors.white,
+                          dotBorder: DotBorder(
+                            width: 1,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      dotDecoration: DotDecoration(
-                        width: 7,
-                        height: 7,
-                        rotationAngle: 45,
-                        color: Colors.transparent,
-                        dotBorder: DotBorder(
-                          width: 1,
-                          color: Colors.white,
+                        dotDecoration: DotDecoration(
+                          width: 7,
+                          height: 7,
+                          rotationAngle: 45,
+                          color: Colors.transparent,
+                          dotBorder: DotBorder(
+                            width: 1,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
