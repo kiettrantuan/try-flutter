@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:f_shop_1/models/banner.dart';
 import 'package:http/http.dart' as http;
 
-class ApiService {
+class BannerApi {
   final String baseUrl = 'https://picsum.photos';
 
   Future<List<BannerItem>> fetchBanners() async {

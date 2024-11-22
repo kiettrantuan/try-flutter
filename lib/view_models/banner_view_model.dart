@@ -1,9 +1,9 @@
 import 'package:f_shop_1/models/banner.dart';
-import 'package:f_shop_1/services/api_service.dart';
+import 'package:f_shop_1/services/api/banner.dart';
 import 'package:flutter/foundation.dart';
 
 class BannerViewModel extends ChangeNotifier {
-  final ApiService apiService;
+  final BannerApi apiService;
   List<BannerItem> _banners = [];
   List<BannerItem> get banners => _banners;
   bool _isLoading = false;

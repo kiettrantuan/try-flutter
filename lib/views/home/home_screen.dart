@@ -1,4 +1,4 @@
-import 'package:f_shop_1/services/api_service.dart';
+import 'package:f_shop_1/services/api/banner.dart';
 import 'package:f_shop_1/view_models/banner_view_model.dart';
 import 'package:f_shop_1/view_models/cart_view_model.dart';
 import 'package:f_shop_1/views/home/widgets/home_banner.dart';
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             ChangeNotifierProvider(
-                create: (context) => BannerViewModel(apiService: ApiService()),
+                create: (context) => BannerViewModel(apiService: BannerApi()),
                 child: const HomeHero()),
             const SafeArea(child: HomeColors())
             // SafeArea(

@@ -1,6 +1,8 @@
 import 'package:f_shop_1/bloc/banner/banner_bloc.dart';
 import 'package:f_shop_1/bloc/cart/cart_bloc.dart';
-import 'package:f_shop_1/services/api_service.dart';
+import 'package:f_shop_1/services/api/banner.dart';
+import 'package:f_shop_1/services/api/cart.dart';
+import 'package:f_shop_1/services/shared_preferences.dart';
 import 'package:f_shop_1/view_models/cart_view_model.dart';
 import 'package:f_shop_1/views/cart/cart_screen.dart';
 import 'package:f_shop_1/views/cart/cart_screen_with_bloc.dart';
@@ -15,7 +17,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferencesService.init();
   runApp(const MyApp());
 }
 
@@ -94,10 +98,13 @@ class MyApp extends StatelessWidget {
         BlocProvider<CartBloc>(create: (_) => CartBloc()),
         BlocProvider<BannerBloc>(
             create: (_) =>
-                BannerBloc(apiService: ApiService())..add(FetchBanners())),
+                BannerBloc(apiService: BannerApi())..add(FetchBanners())),
       ],
       child: MultiProvider(
-        providers: [ChangeNotifierProvider(create: (_) => CartViewModel())],
+        providers: [
+          ChangeNotifierProvider(
+              create: (_) => CartViewModel(apiService: CartApi()))
+        ],
         child: MaterialApp.router(
           title: 'Open Fashion',
           // theme: ThemeData(

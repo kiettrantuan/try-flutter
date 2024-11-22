@@ -47,7 +47,7 @@ class _HomeColorsState extends State<HomeColors> {
   }
 }
 
-final List<ColorItem> colorList = [
+const List<ColorItem> colorList = [
   ColorItem(id: "clr_black_001", title: "Black", color: Colors.black),
   ColorItem(id: "clr_grey_002", title: "Grey", color: Colors.grey),
   ColorItem(id: "clr_red_003", title: "Red", color: Colors.red),

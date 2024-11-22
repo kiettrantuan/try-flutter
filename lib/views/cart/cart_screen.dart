@@ -1,8 +1,8 @@
 import 'package:f_shop_1/view_models/cart_view_model.dart';
-import 'package:f_shop_1/widgets/color_tile.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import './widgets/cart_tile.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -20,49 +20,18 @@ class _CartScreenState extends State<CartScreen> {
       ),
       body: SafeArea(
         child: Consumer<CartViewModel>(builder: (_, cart, __) {
-          var total = cart.cartItems.values
-              .fold(0, (prev, item) => prev + item.quantity);
-
-          List<ColorTile> tiles = [];
+          List<CartTile> cartTiles = [];
           for (var entry in cart.cartItems.entries) {
             final id = entry.key;
             final cartItem = entry.value;
-            if (kDebugMode) {
-              print(id);
-            }
 
-            tiles.insert(
+            cartTiles.insert(
                 0,
-                ColorTile(
-                  colorItem: cartItem.colorItem,
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.remove),
-                        onPressed: () {
-                          cart.removeOne(id);
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.add),
-                        onPressed: () {
-                          cart.add(cartItem.colorItem);
-                        },
-                      ),
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(minWidth: 20),
-                        child: Center(child: Text('${cartItem.quantity}')),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          cart.removeAll(id);
-                        },
-                      ),
-                    ],
-                  ),
-                ));
+                CartTile(
+                    cartItem: cartItem,
+                    onRemove: () => cart.removeOne(id),
+                    onAdd: () => cart.add(cartItem.colorItem),
+                    onRemoveAll: () => cart.removeAll(id)));
           }
 
           return Column(
@@ -73,7 +42,7 @@ class _CartScreenState extends State<CartScreen> {
                 child: ListView(
                   physics: const ClampingScrollPhysics(),
                   children: [
-                    ...ListTile.divideTiles(context: context, tiles: tiles)
+                    ...ListTile.divideTiles(context: context, tiles: cartTiles)
                   ],
                 ),
               )),
@@ -94,7 +63,7 @@ class _CartScreenState extends State<CartScreen> {
                           height: 64,
                         ),
                         const Text('Total'),
-                        Text('$total'),
+                        Text('${cart.totalItems}'),
                       ],
                     ),
                     TableRow(

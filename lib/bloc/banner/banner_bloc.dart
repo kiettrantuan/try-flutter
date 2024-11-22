@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:f_shop_1/models/banner.dart';
-import 'package:f_shop_1/services/api_service.dart';
+import 'package:f_shop_1/services/api/banner.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,7 +12,7 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
   //   on<BannerEvent>((event, emit) {
   //   });
   // }
-  final ApiService apiService;
+  final BannerApi apiService;
 
   BannerBloc({required this.apiService}) : super(BannerInitial()) {
     on<FetchBanners>(_onFetchBanners);
